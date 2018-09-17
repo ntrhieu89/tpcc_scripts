@@ -1,0 +1,208 @@
+Buildfile: /proj/BG/yaz/ycsbcache/oltpbench-wb/build.xml
+
+build:
+
+BUILD SUCCESSFUL
+Total time: 1 second
+h0:11211,h0:11212,h0:11213,h0:11214,h0:11215,h0:11216,h0:11217,h0:11218
+h0 h0 h1
+Created dir /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8.
+################## Version 2
+NgCache = false
+13:18:09,846 (DBWorkload.java:360) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  10.0
+
+13:18:09,848 (DBWorkload.java:361) INFO  - ======================================================================
+13:18:09,872 (DBWorkload.java:620) INFO  - Creating new TPCC database...
+13:18:12,003 (DBWorkload.java:622) INFO  - Finished!
+13:18:12,003 (DBWorkload.java:623) INFO  - ======================================================================
+13:18:12,004 (DBWorkload.java:646) INFO  - Loading data into TPCC database...
+13:19:19,406 (DBWorkload.java:648) INFO  - Finished!
+13:19:19,407 (DBWorkload.java:649) INFO  - ======================================================================
+13:19:19,408 (DBWorkload.java:689) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+Started cache true.
+[1] 34295
+[1] 34299
+[1] 34309
+[1] 34308
+[1] 34310
+[1] 34311
+[1] 34328
+[1] 34329
+Warmup up bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_warmup.sh 10 h0:11211,h0:11212,h0:11213,h0:11214,h0:11215,h0:11216,h0:11217,h0:11218 h0 hieun golinux 1 10
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+Preparing sar
+[1] 34730
+[1] 34756
+[1] 34781
+[1] 34806
+[1] 34857
+[1] 34883
+[1] 34908
+[1] 34933
+[1] 26559
+[1] 26585
+[1] 26610
+[1] 26634
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_runbench.sh true h1 /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8 1 1 h0:11211,h0:11212,h0:11213,h0:11214,h0:11215,h0:11216,h0:11217,h0:11218 1 10 0 1 1
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Copy results
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/throughput.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/NewOrderLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/PaymentLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/DeliveryLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/OrderStatusLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/StockLevelLatency.png
+===========================
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-cpu.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-net.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-mem.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-disk.png
+===========================
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-cpu.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-net.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-mem.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h0-disk.png
+===========================
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h1-cpu.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h1-net.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h1-mem.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-1-th-1-batch-1-arsleep-0-tpc-1-cps-8/h1-disk.png
+Created dir /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8.
+################## Version 2
+NgCache = false
+13:34:58,611 (DBWorkload.java:360) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  10.0
+
+13:34:58,613 (DBWorkload.java:361) INFO  - ======================================================================
+13:34:58,653 (DBWorkload.java:620) INFO  - Creating new TPCC database...
+13:35:00,398 (DBWorkload.java:622) INFO  - Finished!
+13:35:00,398 (DBWorkload.java:623) INFO  - ======================================================================
+13:35:00,399 (DBWorkload.java:646) INFO  - Loading data into TPCC database...
+13:36:03,586 (DBWorkload.java:648) INFO  - Finished!
+13:36:03,587 (DBWorkload.java:649) INFO  - ======================================================================
+13:36:03,587 (DBWorkload.java:689) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+Started cache true.
+[1] 35958
+[1] 35972
+[1] 35977
+[1] 35990
+[1] 35996
+[1] 35997
+[1] 36007
+[1] 36008
+Warmup up bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_warmup.sh 10 h0:11211,h0:11212,h0:11213,h0:11214,h0:11215,h0:11216,h0:11217,h0:11218 h0 hieun golinux 1 10
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+waiting for h0 
+Preparing sar
+[1] 36417
+[1] 36442
+[1] 36467
+[1] 36492
+[1] 36544
+[1] 36569
+[1] 36594
+[1] 36619
+[1] 27582
+[1] 27606
+[1] 27633
+[1] 27658
+Num warehouses per client 5 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_runbench.sh true h1 /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8 5 1 h0:11211,h0:11212,h0:11213,h0:11214,h0:11215,h0:11216,h0:11217,h0:11218 5 10 0 1 5
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Copy results
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/throughput.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/NewOrderLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/PaymentLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/DeliveryLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/OrderStatusLatency.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/StockLevelLatency.png
+===========================
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-cpu.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-net.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-mem.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-disk.png
+===========================
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-cpu.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-net.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-mem.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h0-disk.png
+===========================
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h1-cpu.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h1-net.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h1-mem.png
+Created /proj/BG/hieun/tpcc/cache-true-try-1-w-10-ar-5-th-5-batch-1-arsleep-0-tpc-1-cps-8/h1-disk.png

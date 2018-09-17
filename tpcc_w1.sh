@@ -16,8 +16,8 @@ mkdir -p $results
 
 dbip="h0"
 #cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
-cacheips=( "h11" )
-cacheperserver="100"
+cacheips=( "h0" )
+cacheperserver="8"
 threadsPerCMI="8"
 
 memcache=""
@@ -33,24 +33,26 @@ done
 memcache=${memcache::-1}
 echo $memcache
 
-cliperserver="10"
-clis=( "h1" "h2" "h3" "h4" "h5" "h6" "h7" "h8" "h9" "h10" )
-#clis=( "h1" )
+cliperserver="1"
+#clis=( "h1" "h2" "h3" "h4" "h5" "h6" "h7" "h8" "h9" "h10" )
+clis=( "h1" )
 
 machines=( $dbip ${cacheips[@]} ${clis[@]} )
 echo ${machines[@]}
 #exit -1
 
-warehouses="100"
+warehouses="1"
 #threads="20"
 #batch="10"
-copydb="true"
+copydb="false"
 
+for warehouses in 10
+do
 for cache in "true"
 do
 for try in 1
 do
-for threads in 100
+for threads in 1 5
 do
 for ar in $threads
 #ar=$threads
@@ -62,8 +64,10 @@ for batch in 1
 do
 for arsleep in 0
 do
+for cacheperserver in 8
+do
 	# create a dir
-	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI
+	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver
 
 	mkdir -p $results/$dir
 	dir=$results/$dir
@@ -182,6 +186,10 @@ do
 			fi
 			maxw=$((minw + numThreads-1))
 
+			if [ $maxw -gt $warehouses ]; then
+				maxw=$warehouses
+			fi
+
 			if [ $numThreads -gt 0 ]; then			
 				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw"
 				echo $cmd
@@ -247,6 +255,8 @@ do
                 python admCntrl.py $dir/tmp-"$m"-mem.txt $dir/"$m"-mem
                 python admCntrl.py $dir/tmp-"$m"-disk.txt $dir/"$m"-disk
 	done
+done
+done
 done
 done
 done
