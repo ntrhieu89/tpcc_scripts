@@ -1,0 +1,1359 @@
+Buildfile: /proj/BG/yaz/ycsbcache/oltpbench-wb/build.xml
+
+build:
+
+BUILD SUCCESSFUL
+Total time: 1 second
+h2:11211
+h0 h2 h1
+Parallel = false
+Cache = true eviction= false
+Created dir /tmp/results.
+java: no process found
+java: no process found
+Number of districts per warehouse: 10
+Number of customers per district: 3000
+Number of replicas R = 1
+Use CommitedSession table = true
+Sending buff in parallel = false
+Manual warmup = false
+Persist mode = 3
+################## Version 2
+NgCache = false
+23:39:01,778 (DBWorkload.java:475) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  1.0
+
+23:39:01,780 (DBWorkload.java:476) INFO  - ======================================================================
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+23:39:01,804 (DBWorkload.java:735) INFO  - Creating new TPCC database...
+23:39:02,352 (DBWorkload.java:737) INFO  - Finished!
+23:39:02,353 (DBWorkload.java:738) INFO  - ======================================================================
+23:39:02,353 (DBWorkload.java:761) INFO  - Loading data into TPCC database...
+23:39:27,983 (DBWorkload.java:763) INFO  - Finished!
+23:39:27,984 (DBWorkload.java:764) INFO  - ======================================================================
+23:39:27,985 (DBWorkload.java:804) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+twemcache: no process found
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -Q 1 -i /mnt/bdb-sync_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 6000 -g 7000 -G 999999 -p 11211
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -Q 1 -i /mnt/bdb-sync_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 6000 -g 7000 -G 999999 -p 11211
+Started cache true.
+[1] 59155
+Preparing sar
+sar: no process found
+[1] 98935
+[1] 98962
+[1] 98992
+[1] 99061
+sar: no process found
+[1] 59268
+[1] 59293
+[1] 59318
+[1] 59343
+sar: no process found
+[1] 94687
+[1] 94711
+[1] 94735
+[1] 94759
+rm: No match.
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_polygraph.sh true h1 /tmp/results 1 100 h2:11211 1 1 0 1 1 1.0 1 false false sync_bdb true
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Connection closed by foreign host.
+Waiting before db_stat...
+find: ‘/mnt/lost+found’: Permission denied
+Copy results
+Save to /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000...
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/throughput.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/NewOrderLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/PaymentLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/DeliveryLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/OrderStatusLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/StockLevelLatency.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h0-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h0-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h0-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h0-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h2-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h2-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h2-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h2-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h1-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h1-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h1-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-6000/h1-disk.png
+Cache = true eviction= true
+Created dir /tmp/results.
+java: no process found
+java: no process found
+Number of districts per warehouse: 10
+Number of customers per district: 3000
+Number of replicas R = 1
+Use CommitedSession table = true
+Sending buff in parallel = false
+Manual warmup = false
+Persist mode = 3
+################## Version 2
+NgCache = false
+00:00:13,554 (DBWorkload.java:475) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  1.0
+
+00:00:13,557 (DBWorkload.java:476) INFO  - ======================================================================
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+00:00:13,591 (DBWorkload.java:735) INFO  - Creating new TPCC database...
+00:00:14,067 (DBWorkload.java:737) INFO  - Finished!
+00:00:14,067 (DBWorkload.java:738) INFO  - ======================================================================
+00:00:14,068 (DBWorkload.java:761) INFO  - Loading data into TPCC database...
+00:00:44,497 (DBWorkload.java:763) INFO  - Finished!
+00:00:44,498 (DBWorkload.java:764) INFO  - ======================================================================
+00:00:44,499 (DBWorkload.java:804) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+twemcache: no process found
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -Q 1 -i /mnt/bdb-sync_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 75 -g 7000 -G 999999 -p 11211 -T 1
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -Q 1 -i /mnt/bdb-sync_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 75 -g 7000 -G 999999 -p 11211 -T 1
+Started cache true.
+[1] 61385
+Preparing sar
+sar: no process found
+[1] 105451
+[1] 105479
+[1] 105505
+[1] 105531
+sar: no process found
+[1] 61471
+[1] 61496
+[1] 61521
+[1] 61546
+sar: no process found
+[1] 99835
+[1] 99859
+[1] 99885
+[1] 99910
+rm: No match.
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_polygraph.sh true h1 /tmp/results 1 100 h2:11211 1 1 0 1 1 1.0 1 false false sync_bdb true
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Connection closed by foreign host.
+Waiting before db_stat...
+find: ‘/mnt/lost+found’: Permission denied
+Copy results
+Save to /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75...
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/throughput.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/NewOrderLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/PaymentLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/DeliveryLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/OrderStatusLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/StockLevelLatency.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h0-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h0-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h0-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h0-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h2-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h2-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h2-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h2-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h1-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h1-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h1-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-sync_bdb-rep-1-cz-75/h1-disk.png
+Cache = true eviction= false
+Created dir /tmp/results.
+java: no process found
+java: no process found
+Number of districts per warehouse: 10
+Number of customers per district: 3000
+Number of replicas R = 1
+Use CommitedSession table = true
+Sending buff in parallel = false
+Manual warmup = false
+Persist mode = 3
+################## Version 2
+NgCache = false
+00:22:32,041 (DBWorkload.java:475) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  1.0
+
+00:22:32,043 (DBWorkload.java:476) INFO  - ======================================================================
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+00:22:32,075 (DBWorkload.java:735) INFO  - Creating new TPCC database...
+00:22:32,572 (DBWorkload.java:737) INFO  - Finished!
+00:22:32,572 (DBWorkload.java:738) INFO  - ======================================================================
+00:22:32,573 (DBWorkload.java:761) INFO  - Loading data into TPCC database...
+00:22:57,104 (DBWorkload.java:763) INFO  - Finished!
+00:22:57,105 (DBWorkload.java:764) INFO  - ======================================================================
+00:22:57,105 (DBWorkload.java:804) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+twemcache: no process found
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -i /mnt/bdb-async_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 6000 -g 7000 -G 999999 -p 11211
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -i /mnt/bdb-async_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 6000 -g 7000 -G 999999 -p 11211
+Started cache true.
+[1] 63683
+Preparing sar
+sar: no process found
+[1] 112186
+[1] 112214
+[1] 112240
+[1] 112266
+sar: no process found
+[1] 63771
+[1] 63797
+[1] 63822
+[1] 63848
+sar: no process found
+[1] 105195
+[1] 105220
+[1] 105244
+[1] 105268
+rm: No match.
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_polygraph.sh true h1 /tmp/results 1 100 h2:11211 1 1 0 1 1 1.0 1 false false async_bdb true
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Connection closed by foreign host.
+Waiting before db_stat...
+find: ‘/mnt/lost+found’: Permission denied
+Copy results
+Save to /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000...
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/throughput.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/NewOrderLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/PaymentLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/DeliveryLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/OrderStatusLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/StockLevelLatency.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h0-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h0-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h0-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h0-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h2-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h2-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h2-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h2-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h1-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h1-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h1-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-6000/h1-disk.png
+Cache = true eviction= true
+Created dir /tmp/results.
+java: no process found
+java: no process found
+Number of districts per warehouse: 10
+Number of customers per district: 3000
+Number of replicas R = 1
+Use CommitedSession table = true
+Sending buff in parallel = false
+Manual warmup = false
+Persist mode = 3
+################## Version 2
+NgCache = false
+00:31:53,550 (DBWorkload.java:475) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  1.0
+
+00:31:53,552 (DBWorkload.java:476) INFO  - ======================================================================
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+00:31:53,584 (DBWorkload.java:735) INFO  - Creating new TPCC database...
+00:31:54,142 (DBWorkload.java:737) INFO  - Finished!
+00:31:54,143 (DBWorkload.java:738) INFO  - ======================================================================
+00:31:54,143 (DBWorkload.java:761) INFO  - Loading data into TPCC database...
+00:32:18,674 (DBWorkload.java:763) INFO  - Finished!
+00:32:18,674 (DBWorkload.java:764) INFO  - ======================================================================
+00:32:18,675 (DBWorkload.java:804) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+twemcache: no process found
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -i /mnt/bdb-async_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 75 -g 7000 -G 999999 -p 11211 -T 1
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -q 1 -i /mnt/bdb-async_bdb-h2-11211 -w 1 -F 1 -t 8 -c 8192 -m 75 -g 7000 -G 999999 -p 11211 -T 1
+Started cache true.
+[1] 65010
+Preparing sar
+sar: no process found
+[1] 115600
+[1] 115626
+[1] 115653
+[1] 115679
+sar: no process found
+[1] 65123
+[1] 65149
+[1] 65175
+[1] 65200
+sar: no process found
+[1] 107751
+[1] 107776
+[1] 107802
+[1] 107826
+rm: No match.
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_polygraph.sh true h1 /tmp/results 1 100 h2:11211 1 1 0 1 1 1.0 1 false false async_bdb true
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Connection closed by foreign host.
+Waiting before db_stat...
+find: ‘/mnt/lost+found’: Permission denied
+Copy results
+Save to /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75...
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/throughput.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/NewOrderLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/PaymentLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/DeliveryLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/OrderStatusLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/StockLevelLatency.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h0-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h0-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h0-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h0-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h2-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h2-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h2-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h2-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h1-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h1-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h1-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-async_bdb-rep-1-cz-75/h1-disk.png
+Cache = true eviction= false
+Created dir /tmp/results.
+java: no process found
+java: no process found
+Number of districts per warehouse: 10
+Number of customers per district: 3000
+Number of replicas R = 1
+Use CommitedSession table = true
+Sending buff in parallel = false
+Manual warmup = false
+Persist mode = 3
+################## Version 2
+NgCache = false
+00:54:07,890 (DBWorkload.java:475) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  1.0
+
+00:54:07,892 (DBWorkload.java:476) INFO  - ======================================================================
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+00:54:07,922 (DBWorkload.java:735) INFO  - Creating new TPCC database...
+00:54:08,433 (DBWorkload.java:737) INFO  - Finished!
+00:54:08,433 (DBWorkload.java:738) INFO  - ======================================================================
+00:54:08,434 (DBWorkload.java:761) INFO  - Loading data into TPCC database...
+00:54:32,500 (DBWorkload.java:763) INFO  - Finished!
+00:54:32,501 (DBWorkload.java:764) INFO  - ======================================================================
+00:54:32,502 (DBWorkload.java:804) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+twemcache: no process found
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -t 8 -c 8192 -m 6000 -g 7000 -G 999999 -p 11211
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -t 8 -c 8192 -m 6000 -g 7000 -G 999999 -p 11211
+Started cache true.
+[1] 67340
+Preparing sar
+sar: no process found
+[1] 122399
+[1] 122425
+[1] 122452
+[1] 122479
+sar: no process found
+[1] 67426
+[1] 67450
+[1] 67474
+[1] 67499
+sar: no process found
+[1] 113165
+[1] 113190
+[1] 113215
+[1] 113240
+rm: No match.
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_polygraph.sh true h1 /tmp/results 1 100 h2:11211 1 1 0 1 1 1.0 1 false false no_persist true
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+Connection closed by foreign host.
+Waiting before db_stat...
+find: ‘/mnt/lost+found’: Permission denied
+Copy results
+Save to /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000...
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/throughput.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/NewOrderLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/PaymentLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/DeliveryLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/OrderStatusLatency.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/StockLevelLatency.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h0-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h0-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h0-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h0-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h2-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h2-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h2-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h2-disk.png
+===========================
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h1-cpu.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h1-net.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h1-mem.png
+Created /mnt/results/bdb-true-try-1-w-1-ar-1-th-1-tpc-8-cps-1-pm-no_persist-rep-1-cz-6000/h1-disk.png
+Cache = true eviction= true
+Created dir /tmp/results.
+java: no process found
+java: no process found
+Number of districts per warehouse: 10
+Number of customers per district: 3000
+Number of replicas R = 1
+Use CommitedSession table = true
+Sending buff in parallel = false
+Manual warmup = false
+Persist mode = 3
+################## Version 2
+NgCache = false
+01:03:17,738 (DBWorkload.java:475) INFO  - ======================================================================
+
+Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
+Configuration: config/tpcc_mysql.xml
+Type:          MYSQL
+Driver:        com.mysql.jdbc.Driver
+URL:           jdbc:mysql://h0:3306/tpcc?serverTimezone=UTC&useSSL=false&rewriteBatchedStatements=true
+Isolation:     TRANSACTION_SERIALIZABLE
+Scale Factor:  1.0
+
+01:03:17,739 (DBWorkload.java:476) INFO  - ======================================================================
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+01:03:17,763 (DBWorkload.java:735) INFO  - Creating new TPCC database...
+01:03:18,265 (DBWorkload.java:737) INFO  - Finished!
+01:03:18,265 (DBWorkload.java:738) INFO  - ======================================================================
+01:03:18,266 (DBWorkload.java:761) INFO  - Loading data into TPCC database...
+01:03:44,896 (DBWorkload.java:763) INFO  - Finished!
+01:03:44,896 (DBWorkload.java:764) INFO  - ======================================================================
+01:03:44,897 (DBWorkload.java:804) INFO  - Skipping benchmark workload execution
+Loaded database.
+Start cache
+twemcache: no process found
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -t 8 -c 8192 -m 75 -g 7000 -G 999999 -p 11211 -T 1
+/proj/BG/yaz/ycsbcache/IQ-Twemcached-wb/src/twemcache -t 8 -c 8192 -m 75 -g 7000 -G 999999 -p 11211 -T 1
+Started cache true.
+[1] 68671
+Preparing sar
+sar: no process found
+[1] 125723
+[1] 125749
+[1] 125776
+[1] 125802
+sar: no process found
+[1] 68795
+[1] 68819
+[1] 68843
+[1] 68867
+sar: no process found
+[1] 115657
+[1] 115681
+[1] 115706
+[1] 115732
+rm: No match.
+Num warehouses per client 1 and remain 0
+bash /proj/BG/yaz/ycsbcache/oltpbench-wb/tpcc_polygraph.sh true h1 /tmp/results 1 100 h2:11211 1 1 0 1 1 1.0 1 false false no_persist true
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 
+waiting for h1 

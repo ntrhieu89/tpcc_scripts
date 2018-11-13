@@ -2,7 +2,7 @@
 
 base="/proj/BG/yaz/ycsbcache"
 bench="/proj/BG/yaz/ycsbcache/oltpbench-wb"
-results="/proj/BG/hieun/tpcc"
+results="/tmp/tpcc"
 
 # Rebuild the project
 cd $bench
@@ -37,16 +37,18 @@ echo $memcache
 
 cliperserver="1"
 #clis=( "h1" "h2" "h3" "h4" "h5" "h6" "h7" "h8" "h9" "h10" )
-clis=( "h1" )
+clis=( "h0" )
 
 machines=( $dbip ${cacheips[@]} ${clis[@]} )
 echo ${machines[@]}
 #exit -1
 
 warehouses="1"
-#threads="20"
-#batch="10"
 copydb="false"
+batch="100"
+arsleep="0"
+storesess="false"
+manualwarmup="true"
 
 for warehouses in 1
 do
@@ -54,25 +56,20 @@ for cache in "true"
 do
 for try in 1
 do
+for rep in 1
+do
+for persistMode in "async_bdb_evict" "async_bdb" "sync_bdb" "no_bdb" "sync_bdb_evict" "async_bdb_evict"
+do
 for threads in 1
 do
 for ar in 1
-#ar=$threads
-#ar=0
-#ar="1"
 do
-for threadsPerCMI in 1
-do
-for batch in 10 100
-do
-for arsleep in 0
+for threadsPerCMI in 8
 do
 for cacheperserver in 1
 do
-for storesess in "true" "false"
-do
 	# create a dir
-	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-storesess-"$storesess
+	dir="bdb-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-pm-"$persistMode"-rep-"$rep
 
 	mkdir -p $results/$dir
 	dir=$results/$dir
@@ -95,7 +92,7 @@ do
 		sudo service mysql start
 	else
 		cd $bench
-		./oltpbenchmark -b tpcc -c config/tpcc_mysql.xml --create=true --load=true --scalefactor=$warehouses --threads=$threads
+		./oltpbenchmark -b tpcc -c haoyu_tpcc_mysql.xml --create=true --load=true --scalefactor=$warehouses --threads=$threads
 		cd $base/scripts/ngcache
 	fi
 	echo "Loaded database."
@@ -114,8 +111,28 @@ do
 			port=11211
 			for ((i=0; i < $cacheperserver; i++))
 			do
-				ssh -oStrictHostKeyChecking=no $ip "nohup $base/IQ-Twemcached/src/twemcache -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port > $dir/cache$ip-$port.txt &" &
+				ssh $ip "rm -rf /mnt/bdb/*"
+				ssh $ip "mkdir -p /mnt/bdb"
+				ssh $ip "sudo chmod -R 777 /mnt/bdb"
+				verbose=3
+				
+				if [[ $persistMode == "sync_bdb" ]]; then
+					cmd="/tmp/IQ-Twemcached-wb/src/twemcache -v $verbose -q 1 -Q 1 -i /mnt/bdb -w 1 -F 1 -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port"
+				elif [[ $persistMode == "async_bdb" ]]; then
+					cmd="/tmp/IQ-Twemcached-wb/src/twemcache -v $verbose -q 1 -i /mnt/bdb -w 1 -F 1 -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port"
+				elif [[ $persistMode == "async_bdb_evict" ]]; then
+                                        cmd="/tmp/IQ-Twemcached-wb/src/twemcache -v $verbose -q 1 -i /mnt/bdb -w 1 -F 1 -t $threadsPerCMI -c 8192 -m 4 -g 7000 -G 999999 -p $port -T 1"
+				persistMode="async_bdb"
+				elif [[ $persistMode == "sync_bdb_evict" ]]; then
+                                        cmd="/tmp/IQ-Twemcached-wb/src/twemcache -v $verbose -q 1 -i /mnt/bdb -Q 1 -w 1 -F 1 -t $threadsPerCMI -c 8192 -m 4 -g 7000 -G 999999 -p $port -T 1"
+					persistMode="sync_bdb"
+				else
+					cmd="/tmp/IQ-Twemcached-wb/src/twemcache -v $verbose -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port"
+				fi
+
+				ssh -oStrictHostKeyChecking=no $ip "nohup $cmd >& $dir/cache$ip-$port.txt &" &
 				port=$((port+1))
+				echo $cmd
 			done
 		done
         	echo "Started cache $cache."
@@ -123,26 +140,6 @@ do
 	#exit 0
 
 	sleep 5
-
-	# perform warm up
-	numClis=${#cacheips[@]}
-	numThreadsPerWarmupCli=$((warehouses / numClis))
-
-	if [ $cache == "true" ]; then
-		for ((i=0; i < $numClis; i++))
-		do
-			min=$((i*numThreadsPerWarmupCli + 1))
-			max=$(( (i+1) * numThreadsPerWarmupCli ))
-			remain=$((warehouses - max))
-			if [ $remain -ge $numThreadsPerWarmupCli ]; then
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max 10 3000 true"
-			else
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses 10 3000 true"
-			fi
-			echo "Warmup up "$cmd
-			ssh -oStrictHostKeyChecking=no -n -f ${cacheips[$i]} screen -S tpcc -dm $cmd
-		done		
-	fi
 
         sleepcount="0"
         for ip in ${cacheips[@]}
@@ -194,9 +191,10 @@ do
 			if [ $maxw -gt $warehouses ]; then
 				maxw=$warehouses
 			fi
+			
 
 			if [ $numThreads -gt 0 ]; then			
-				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess"
+				cmd="bash $bench/haoyu_tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess false $persistMode $manualwarmup"
 				echo $cmd
 				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S tpcc -dm $cmd
 			fi
@@ -221,6 +219,20 @@ do
 			sleep 10
 			echo "waiting for $cli "
 		done
+	done
+
+	# get cachestats
+	for ip in ${cacheips[@]}
+	do
+		{ sleep 2; echo "stats"; sleep 2; echo "quit"; sleep 1; } | telnet $ip 11211 > $dir/"cachestats.txt"
+		
+		# get bdb stats
+		if [[ $persistMode == "async_bdb" ]] || [[ $persistMode == "sync_bdb" ]]; then
+			ssh $ip "db_stat -d /mnt/bdb/bdb-app.db > $dir/bdb_stat_app.txt"
+			ssh $ip "db_stat -d /mnt/bdb/bdb-mapping.db > $dir/bdb_stat_mapping.txt"
+			ssh $ip "db_stat -d /mnt/bdb/bdb-buffered-writes.db > $dir/bdb_stat_buffered_writes.txt"
+			ssh $ip "db_stat -d /mnt/bdb/bdb-warehouse-0-queue.db > $dir/bdb_stat_warehouse_0_queue.txt"			
+		fi
 	done
 
 	echo "Copy results"
@@ -260,7 +272,6 @@ do
                 python admCntrl.py $dir/tmp-"$m"-mem.txt $dir/"$m"-mem
                 python admCntrl.py $dir/tmp-"$m"-disk.txt $dir/"$m"-disk
 	done
-done
 done
 done
 done

@@ -15,8 +15,12 @@ mkdir -p $results
 #nthreads="100"
 
 dbip="h0"
-cacheips=("h3" "h4")
-cacheperserver="5"
+#cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
+cacheips=( "h2" )
+cacheperserver="10"
+threadsPerCMI="8"
+rep=1
+storesess="false"
 
 memcache=""
 for ip in ${cacheips[@]}
@@ -31,31 +35,42 @@ done
 memcache=${memcache::-1}
 echo $memcache
 
-cliperserver="5"
-clis=("h1" "h2")
+cliperserver="10"
+#clis=( "h1" "h2" "h3" "h4" "h5" "h6" "h7" "h8" "h9" "h10" )
+clis=( "h1" )
 
 machines=( $dbip ${cacheips[@]} ${clis[@]} )
 echo ${machines[@]}
 #exit -1
 
-warehouses="10"
+warehouses="1"
 #threads="20"
 #batch="10"
 copydb="false"
 
+for warehouses in 10
+do
 for cache in "true"
 do
-for try in 1
+for try in 8
 do
-for threads in 5 10
+for threads in 10
 do
+#for ar in 10
 ar=$threads
-for batch in 1
+#ar=0
+#ar="1"
+#do
+for threadsPerCMI in 1
+do
+for batch in 10 100
 do
 for arsleep in 0
 do
+for storesess in "true" "false"
+do
 	# create a dir
-	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep
+	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-storesess-"$storesess
 
 	mkdir -p $results/$dir
 	dir=$results/$dir
@@ -66,10 +81,15 @@ do
 		ssh $cli "killall java"
 	done
 
+        for ip in ${cacheips[@]}
+        do
+                ssh $ip "killall java"
+        done
+
 	# copy database
 	if [[ $copydb == "true" ]]; then
 		sudo service mysql stop
-		sudo cp -av /mnt2/mysql_tpcc_"$warehouses"w/* /mnt/mysql
+		sudo cp -av $base/mysql_tpcc_"$warehouses"w/* /mnt/mysql
 		sudo service mysql start
 	else
 		cd $bench
@@ -92,7 +112,7 @@ do
 			port=11211
 			for ((i=0; i < $cacheperserver; i++))
 			do
-				ssh -oStrictHostKeyChecking=no $ip "nohup $base/IQ-Twemcached/src/twemcache -t 8 -c 8192 -m 20000 -g 7000 -G 999999 -p $port > $dir/cache$ip.txt &" &
+				ssh -oStrictHostKeyChecking=no $ip "nohup $base/IQ-Twemcached/src/twemcache -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port > $dir/cache$ip-$port.txt &" &
 				port=$((port+1))
 			done
 		done
@@ -111,7 +131,12 @@ do
 		do
 			min=$((i*numThreadsPerWarmupCli + 1))
 			max=$(( (i+1) * numThreadsPerWarmupCli ))
-			cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max"
+			remain=$((warehouses - max))
+			if [ $remain -ge $numThreadsPerWarmupCli ]; then
+				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max 10 3000 false"
+			else
+				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses 10 3000 false"
+			fi
 			echo "Warmup up "$cmd
 			ssh -oStrictHostKeyChecking=no -n -f ${cacheips[$i]} screen -S tpcc -dm $cmd
 		done		
@@ -164,8 +189,12 @@ do
 			fi
 			maxw=$((minw + numThreads-1))
 
+			if [ $maxw -gt $warehouses ]; then
+				maxw=$warehouses
+			fi
+
 			if [ $numThreads -gt 0 ]; then			
-				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw"
+				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess"
 				echo $cmd
 				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S tpcc -dm $cmd
 			fi
@@ -229,6 +258,10 @@ do
                 python admCntrl.py $dir/tmp-"$m"-mem.txt $dir/"$m"-mem
                 python admCntrl.py $dir/tmp-"$m"-disk.txt $dir/"$m"-disk
 	done
+#done
+done
+done
+done
 done
 done
 done

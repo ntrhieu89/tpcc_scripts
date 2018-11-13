@@ -16,7 +16,7 @@ mkdir -p $results
 
 dbip="h0"
 #cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
-cacheips=( "h0" )
+cacheips=( "h2" )
 cacheperserver="1"
 threadsPerCMI="8"
 rep="1"
@@ -52,24 +52,24 @@ for warehouses in 1
 do
 for cache in "true"
 do
-for try in 1
+for try in 7
 do
 for threads in 1
 do
-for ar in 1
+for ar in 0
 #ar=$threads
 #ar=0
 #ar="1"
 do
-for threadsPerCMI in 1
+for threadsPerCMI in 8
 do
-for batch in 10 100
+for batch in 100
 do
 for arsleep in 0
 do
 for cacheperserver in 1
 do
-for storesess in "true" "false"
+for storesess in "false"
 do
 	# create a dir
 	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-storesess-"$storesess
@@ -114,8 +114,22 @@ do
 			port=11211
 			for ((i=0; i < $cacheperserver; i++))
 			do
-				ssh -oStrictHostKeyChecking=no $ip "nohup $base/IQ-Twemcached/src/twemcache -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port > $dir/cache$ip-$port.txt &" &
+				ssh $ip "sudo rm -rf /mnt/bdb/*"
+				ssh $ip "sudo mkdir -p /mnt/bdb"
+				ssh $ip "sudo chmod -R 777 /mnt/bdb"
+				
+				cmd="$base/IQ-Twemcached/src/twemcache -q 1 -Q 1 -i /mnt/bdb -w 1 -F 1 -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port"
+
+				#cmd="$base/IQ-Twemcached/src/twemcache -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port"
+
+				ssh -oStrictHostKeyChecking=no $ip "nohup $cmd > $dir/cache$ip-$port.txt &" &
 				port=$((port+1))
+				echo $cmd
+
+				#sleep 5
+
+				#cmd="db_deadlock -h /mnt/bdb -L $dir/deadlock_log.txt -v -t 0.10000"
+				#ssh -oStrictHostKeyChecking=no $ip "nohup $cmd > $dir/dl_log.txt &" &
 			done
 		done
         	echo "Started cache $cache."
@@ -123,26 +137,6 @@ do
 	#exit 0
 
 	sleep 5
-
-	# perform warm up
-	numClis=${#cacheips[@]}
-	numThreadsPerWarmupCli=$((warehouses / numClis))
-
-	if [ $cache == "true" ]; then
-		for ((i=0; i < $numClis; i++))
-		do
-			min=$((i*numThreadsPerWarmupCli + 1))
-			max=$(( (i+1) * numThreadsPerWarmupCli ))
-			remain=$((warehouses - max))
-			if [ $remain -ge $numThreadsPerWarmupCli ]; then
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max 10 3000 true"
-			else
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses 10 3000 true"
-			fi
-			echo "Warmup up "$cmd
-			ssh -oStrictHostKeyChecking=no -n -f ${cacheips[$i]} screen -S tpcc -dm $cmd
-		done		
-	fi
 
         sleepcount="0"
         for ip in ${cacheips[@]}
@@ -196,7 +190,7 @@ do
 			fi
 
 			if [ $numThreads -gt 0 ]; then			
-				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess"
+				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess false"
 				echo $cmd
 				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S tpcc -dm $cmd
 			fi
@@ -221,6 +215,12 @@ do
 			sleep 10
 			echo "waiting for $cli "
 		done
+	done
+
+	# get cachestats
+	for ip in ${cacheips[@]}
+	do
+		{ sleep 2; echo "stats"; sleep 2; echo "quit"; sleep 1; } | telnet $ip 11211 > $dir/"cachestats.txt"
 	done
 
 	echo "Copy results"

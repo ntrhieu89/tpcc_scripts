@@ -15,9 +15,9 @@ mkdir -p $results
 #nthreads="100"
 
 dbip="h0"
-#cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
-cacheips=( "h11" )
-cacheperserver="100"
+cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
+#cacheips=( "h11" )
+cacheperserver="10"
 threadsPerCMI="8"
 
 memcache=""
@@ -48,9 +48,9 @@ copydb="true"
 
 for cache in "true"
 do
-for try in 1
+for try in 9
 do
-for threads in 100
+for threads in 1 10 20 30 40 50 60 70 80 90 100
 do
 for ar in $threads
 #ar=$threads
@@ -58,7 +58,7 @@ for ar in $threads
 do
 for threadsPerCMI in 1
 do
-for batch in 1
+for batch in 10
 do
 for arsleep in 0
 do
@@ -72,11 +72,17 @@ do
         for cli in ${clis[@]}
         do
 		ssh $cli "killall java"
+		ssh $cli "killall bash"
 	done
 
         for ip in ${cacheips[@]}
         do
                 ssh $ip "killall java"
+
+		if [ $ip != "h0" ]; then
+			echo "Kill bash $ip"
+			ssh $ip "killall bash"
+		fi
         done
 
 	# copy database
@@ -105,7 +111,7 @@ do
 			port=11211
 			for ((i=0; i < $cacheperserver; i++))
 			do
-				ssh -oStrictHostKeyChecking=no $ip "nohup $base/IQ-Twemcached/src/twemcache -t $threadsPerCMI -c 8192 -m 10000 -g 7000 -G 999999 -p $port > $dir/cache$ip-$port.txt &" &
+				ssh -oStrictHostKeyChecking=no $ip "nohup $base/IQ-Twemcached/src/twemcache -t $threadsPerCMI -c 20000 -m 20000 -g 1000 -G 999999 -p $port > $dir/cache$ip-$port.txt &" &
 				port=$((port+1))
 			done
 		done
@@ -126,9 +132,9 @@ do
 			max=$(( (i+1) * numThreadsPerWarmupCli ))
 			remain=$((warehouses - max))
 			if [ $remain -ge $numThreadsPerWarmupCli ]; then
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max"
+				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max 10 3000 false"
 			else
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses"
+				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses 10 3000 false"
 			fi
 			echo "Warmup up "$cmd
 			ssh -oStrictHostKeyChecking=no -n -f ${cacheips[$i]} screen -S tpcc -dm $cmd
@@ -183,7 +189,7 @@ do
 			maxw=$((minw + numThreads-1))
 
 			if [ $numThreads -gt 0 ]; then			
-				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw"
+				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0"
 				echo $cmd
 				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S tpcc -dm $cmd
 			fi

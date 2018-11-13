@@ -17,10 +17,8 @@ mkdir -p $results
 dbip="h0"
 #cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
 cacheips=( "h0" )
-cacheperserver="1"
+cacheperserver="8"
 threadsPerCMI="8"
-rep="1"
-storesess="false"
 
 memcache=""
 for ip in ${cacheips[@]}
@@ -48,31 +46,28 @@ warehouses="1"
 #batch="10"
 copydb="false"
 
-for warehouses in 1
+for warehouses in 10
 do
 for cache in "true"
 do
 for try in 1
 do
-for threads in 1
+for threads in 1 5
 do
-for ar in 1
+for ar in $threads
 #ar=$threads
 #ar=0
-#ar="1"
 do
 for threadsPerCMI in 1
 do
-for batch in 10 100
+for batch in 1
 do
 for arsleep in 0
 do
-for cacheperserver in 1
-do
-for storesess in "true" "false"
+for cacheperserver in 8
 do
 	# create a dir
-	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-storesess-"$storesess
+	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver
 
 	mkdir -p $results/$dir
 	dir=$results/$dir
@@ -91,11 +86,11 @@ do
 	# copy database
 	if [[ $copydb == "true" ]]; then
 		sudo service mysql stop
-		sudo cp -av $base/mysql_tpcc_"$warehouses"w/* /mnt/mysql
+		sudo cp -av $base/mysql_sbank_"$warehouses"w/* /mnt/mysql
 		sudo service mysql start
 	else
 		cd $bench
-		./oltpbenchmark -b tpcc -c config/tpcc_mysql.xml --create=true --load=true --scalefactor=$warehouses --threads=$threads
+		./oltpbenchmark -b smallbank -c config/tpcc_mysql.xml --create=true --load=true --scalefactor=$warehouses --threads=$threads
 		cd $base/scripts/ngcache
 	fi
 	echo "Loaded database."
@@ -135,19 +130,19 @@ do
 			max=$(( (i+1) * numThreadsPerWarmupCli ))
 			remain=$((warehouses - max))
 			if [ $remain -ge $numThreadsPerWarmupCli ]; then
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max 10 3000 true"
+				cmd="bash $bench/sbank_warmup.sh $warehouses $memcache $dbip hieun golinux $min $max"
 			else
-				cmd="bash $bench/tpcc_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses 10 3000 true"
+				cmd="bash $bench/sbank_warmup.sh $warehouses $memcache $dbip hieun golinux $min $warehouses"
 			fi
 			echo "Warmup up "$cmd
-			ssh -oStrictHostKeyChecking=no -n -f ${cacheips[$i]} screen -S tpcc -dm $cmd
+			ssh -oStrictHostKeyChecking=no -n -f ${cacheips[$i]} screen -S sbank -dm $cmd
 		done		
 	fi
 
         sleepcount="0"
         for ip in ${cacheips[@]}
         do
-                while ssh -oStrictHostKeyChecking=no $ip "screen -list | grep -q tpcc"
+                while ssh -oStrictHostKeyChecking=no $ip "screen -list | grep -q sbank"
                 do
                         ((sleepcount++))
                         sleep 30
@@ -196,9 +191,9 @@ do
 			fi
 
 			if [ $numThreads -gt 0 ]; then			
-				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess"
+				cmd="bash $bench/sbank_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw"
 				echo $cmd
-				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S tpcc -dm $cmd
+				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S sbank -dm $cmd
 			fi
 			minw=$((maxw+1))
 
@@ -215,10 +210,10 @@ do
 	sleepcount="0"
 	for cli in ${clis[@]}
 	do
-		while ssh -oStrictHostKeyChecking=no $cli "screen -list | grep -q tpcc"
+		while ssh -oStrictHostKeyChecking=no $cli "screen -list | grep -q sbank"
 		do
 			((sleepcount++))
-			sleep 10
+			sleep 30
 			echo "waiting for $cli "
 		done
 	done
@@ -260,7 +255,6 @@ do
                 python admCntrl.py $dir/tmp-"$m"-mem.txt $dir/"$m"-mem
                 python admCntrl.py $dir/tmp-"$m"-disk.txt $dir/"$m"-disk
 	done
-done
 done
 done
 done

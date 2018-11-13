@@ -16,11 +16,9 @@ mkdir -p $results
 
 dbip="h0"
 #cacheips=( "h11" "h12" "h13" "h14" "h15" "h16" "h17" "h18" "h19" "h20" )
-cacheips=( "h0" )
+cacheips=( "h1" "h2" "h3" )
 cacheperserver="1"
 threadsPerCMI="8"
-rep="1"
-storesess="false"
 
 memcache=""
 for ip in ${cacheips[@]}
@@ -37,7 +35,7 @@ echo $memcache
 
 cliperserver="1"
 #clis=( "h1" "h2" "h3" "h4" "h5" "h6" "h7" "h8" "h9" "h10" )
-clis=( "h1" )
+clis=( "h4" )
 
 machines=( $dbip ${cacheips[@]} ${clis[@]} )
 echo ${machines[@]}
@@ -47,6 +45,7 @@ warehouses="1"
 #threads="20"
 #batch="10"
 copydb="false"
+parallel="false"
 
 for warehouses in 1
 do
@@ -54,7 +53,7 @@ for cache in "true"
 do
 for try in 1
 do
-for threads in 1
+for threads in 5
 do
 for ar in 1
 #ar=$threads
@@ -63,16 +62,18 @@ for ar in 1
 do
 for threadsPerCMI in 1
 do
-for batch in 10 100
+for batch in 100
 do
 for arsleep in 0
 do
 for cacheperserver in 1
 do
-for storesess in "true" "false"
+for parallel in "false" "true"
+do
+for rep in 1 2 3
 do
 	# create a dir
-	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-storesess-"$storesess
+	dir="cache-"$cache"-try-"$try"-w-"$warehouses"-ar-"$ar"-th-"$threads"-batch-"$batch"-arsleep-"$arsleep"-tpc-"$threadsPerCMI"-cps-"$cacheperserver"-rep-"$rep"-prl-"$parallel
 
 	mkdir -p $results/$dir
 	dir=$results/$dir
@@ -125,7 +126,7 @@ do
 	sleep 5
 
 	# perform warm up
-	numClis=${#cacheips[@]}
+	numClis=1
 	numThreadsPerWarmupCli=$((warehouses / numClis))
 
 	if [ $cache == "true" ]; then
@@ -196,7 +197,7 @@ do
 			fi
 
 			if [ $numThreads -gt 0 ]; then			
-				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep $storesess"
+				cmd="bash $bench/tpcc_runbench.sh $cache $cli $dir $ar $batch $memcache $numThreads $warehouses $arsleep $minw $maxw 1.0 $rep false $parallel"
 				echo $cmd
 				ssh -oStrictHostKeyChecking=no -n -f $cli screen -S tpcc -dm $cmd
 			fi
@@ -260,6 +261,7 @@ do
                 python admCntrl.py $dir/tmp-"$m"-mem.txt $dir/"$m"-mem
                 python admCntrl.py $dir/tmp-"$m"-disk.txt $dir/"$m"-disk
 	done
+done
 done
 done
 done
